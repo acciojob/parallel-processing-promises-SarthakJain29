@@ -8,8 +8,8 @@ const images = [
   { url: "https://picsum.photos/id/239/200/300" },
 ];
 
-function downloadImage(url) => {
-	return new Promise((resolve.reject)=>{
+function downloadImage(url) {
+	return new Promise((resolve,reject)=>{
 		const img = document.createElement("img");
 		img.src = url;
 		img.onload = () => resolve(img);
@@ -17,13 +17,13 @@ function downloadImage(url) => {
 	})
 }
 
-function downloadImages(() => {
+function downloadImages(images) {
 	const loading = document.getElementById("loading");
 	const error = document.getElementById("error");
-	const output = document.getElementbyId("output");
+	const output = document.getElementById("output");
 
 	Promise.all(images.map(downloadImage))
-		.then(image => {
+		.then(images => {
 			loading.style.display = "none";
 			image.forEach(img => output.appendChild(img));
 		})
@@ -31,4 +31,4 @@ function downloadImages(() => {
 			loading.style.display = "none";
 			error.textContent = err;
 		})
-})
+}
