@@ -22,14 +22,18 @@ function downloadImages(images) {
 	const error = document.getElementById("error");
 	const output = document.getElementById("output");
 
-	Promise.all(images.map(downloadImage))
-		.then(images => {
-			loading.style.display = "none";
-			image.forEach(img => output.appendChild(img));
-		})
-		.catch(err => {
-			loading.style.display = "none";
-			error.textContent = err;
-		})
-}
-document.getElementById("download-images-button").addEventListener("click", downloadImages(images));
+	output.innerHTML = "";
+    error.textContent = "";
+    loading.style.display = "block";
+	
+	 Promise.all(images.map(img => downloadImage(img.url)))
+                .then(images => {
+                    loading.style.display = "none";
+                    images.forEach(img => output.appendChild(img)); // Fixed: 'images' instead of 'image'
+                })
+                .catch(err => {
+                    loading.style.display = "none";
+                    error.textContent = err;
+                });
+        }
+document.getElementById("download-images-button").addEventListener("click", () => downloadImages(images));
