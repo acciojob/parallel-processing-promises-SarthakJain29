@@ -32,3 +32,4 @@ function downloadImages(images) {
 			error.textContent = err;
 		})
 }
+document.getElementById("download-images-button").addEventListener("click", downloadImages(images));
